@@ -31,7 +31,6 @@ import Animated, {
 } from 'react-native-reanimated'
 import { Obx } from './index'
 import AppText from './AppText'
-import { ChevronDownSvg } from '../../src/Assets/Svg'
 import { Colors } from './Colors'
 
 interface AccordionProps extends CollapsibleProps {
@@ -115,7 +114,11 @@ const Accordion = forwardRef(
                 customArrow(state.collapsed)
               ) : (
                 <Animated.View style={arrowStyle}>
-                  <ChevronDownSvg color={Colors.white} size={14} />
+                  <Image
+                    source={require('../Assets/arrow_down.png')}
+                    style={{ height: 14, width: 14 }}
+                    resizeMode={'contain'}
+                  />
                 </Animated.View>
               )
             }

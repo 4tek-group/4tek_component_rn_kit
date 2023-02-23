@@ -1,9 +1,8 @@
 // @ts-ignore
 import React, { memo, useMemo } from 'react'
-import { Pressable, TextStyle, View, ViewStyle } from 'react-native'
+import { Image, Pressable, TextStyle, View, ViewStyle } from 'react-native'
 import { XStyleSheet } from '../Theme'
 import AppText from './AppText'
-import { ChevronRightSvg } from '../Assets/Svg'
 import { Colors } from './Colors'
 interface PaginationProps {
   maxPage: number
@@ -105,7 +104,10 @@ const Pagination = ({
         >
           {icLeft || (
             <View style={{ transform: [{ rotate: '180deg' }] }}>
-              <ChevronRightSvg color={Colors.white} />
+              <Image
+                source={require('../Assets/arrow_right.png')}
+                style={{ height: 20, width: 20 }}
+              />
             </View>
           )}
         </Pressable>
@@ -116,7 +118,12 @@ const Pagination = ({
           onPress={() => onChange(currentPage + 1)}
           style={[styles.arrowView, arrowStyle]}
         >
-          {icRight || <ChevronRightSvg color={Colors.white} />}
+          {icRight || (
+            <Image
+              source={require('../Assets/arrow_right.png')}
+              style={{ height: 20, width: 20 }}
+            />
+          )}
         </Pressable>
       )}
     </View>

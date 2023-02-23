@@ -1,8 +1,7 @@
-import { ChevronRightSvg } from '../Assets/Svg'
 import { goBack } from '../Utils/NavigationUtils'
 // @ts-ignore
 import React, { memo } from 'react'
-import { TouchableOpacity, View, StyleSheet } from 'react-native'
+import { TouchableOpacity, View, StyleSheet, Image } from 'react-native'
 import AppText from './AppText'
 interface AppBarProps {
   title: string
@@ -26,7 +25,10 @@ const AppBar = ({
         leftComponent
       ) : (
         <TouchableOpacity onPress={onBackPress} style={styles.backBtn}>
-          <ChevronRightSvg />
+          <Image
+            source={require('../Assets/arrow_right.png')}
+            style={{ height: 20, width: 20 }}
+          />
         </TouchableOpacity>
       )}
       <AppText fontSize={20}>{title}</AppText>
