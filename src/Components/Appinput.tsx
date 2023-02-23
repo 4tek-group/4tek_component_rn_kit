@@ -16,8 +16,17 @@ import {
   TextStyle,
   ViewStyle,
   TouchableWithoutFeedback,
+  LayoutChangeEvent,
   Image,
 } from 'react-native'
+import Animated, {
+  useAnimatedStyle,
+  withTiming,
+  Easing,
+  useDerivedValue,
+  interpolateColor,
+  FadeIn,
+} from 'react-native-reanimated'
 import AppText from './AppText'
 import Padding from './Padding'
 import { Layout, XStyleSheet } from '../Theme'
@@ -143,6 +152,8 @@ interface InputRef {
   blur(): void
 }
 
+const AnimatedText = Animated.createAnimatedComponent(Text)
+
 const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
   {
     style,
@@ -174,12 +185,14 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
     showPasswordContainerStyles,
     multiline,
     value = '',
+    animationDuration = 150,
     textError,
     errorStyle,
     ...rest
   }: Props,
   ref: any,
 ) => {
+  const [halfTop, setHalfTop] = useState(0)
   const [isFocusedState, setIsFocused] = useState(false)
   const [secureText, setSecureText] = useState(true)
   const inputRef = useRef<any>(null)
@@ -195,6 +208,38 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
     setGlobalStyles?.customLabelStyles,
     customLabelStyles,
   ])
+
+  const [fontColorAnimated, setFontColorAnimated] = useState(0)
+
+  const [fontSizeAnimated, setFontSizeAnimated] = useState(
+    isFocused
+      ? customLabelStyles.fontSizeFocused
+        ? customLabelStyles.fontSizeFocused
+        : 10
+      : customLabelStyles.fontSizeBlurred
+      ? customLabelStyles.fontSizeBlurred
+      : 14,
+  )
+
+  const [leftAnimated, setLeftAnimated] = useState(
+    staticLabel
+      ? customLabelStyles?.leftFocused !== undefined
+        ? customLabelStyles.leftFocused
+        : 15
+      : customLabelStyles && customLabelStyles.leftBlurred !== undefined
+      ? customLabelStyles.leftBlurred
+      : 0,
+  )
+
+  const [topAnimated, setTopAnimated] = useState(
+    staticLabel
+      ? customLabelStyles?.topFocused !== undefined
+        ? customLabelStyles.topFocused
+        : 0
+      : customLabelStyles.topBlurred
+      ? customLabelStyles.topBlurred
+      : 0,
+  )
 
   useEffect(() => {
     if (isFocused === undefined) {
@@ -221,6 +266,16 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
       _toggleVisibility(togglePassword)
     }
   }, [_toggleVisibility, togglePassword])
+
+  useEffect(() => {
+    if (isFocusedState || value !== '') {
+      if (halfTop !== 0) {
+        animateFocus()
+      }
+    } else {
+      animateBlur()
+    }
+  }, [isFocusedState, halfTop, value, animateFocus, animateBlur])
 
   useImperativeHandle(ref, () => ({
     focus() {
@@ -333,6 +388,51 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
       alignSelf: 'center',
     },
   ])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  async function animateFocus() {
+    if (!staticLabel) {
+      setLeftAnimated(
+        customLabelStyles.leftFocused ? customLabelStyles.leftFocused : 0,
+      )
+      setFontSizeAnimated(
+        customLabelStyles.fontSizeFocused
+          ? customLabelStyles.fontSizeFocused
+          : 10,
+      )
+      setTopAnimated(
+        customLabelStyles.topFocused
+          ? customLabelStyles.topFocused
+          : -halfTop +
+              (customLabelStyles.fontSizeFocused
+                ? customLabelStyles.fontSizeFocused
+                : 10),
+      )
+      setFontColorAnimated(1)
+    } else {
+      setFontColorAnimated(1)
+    }
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  async function animateBlur() {
+    if (!staticLabel) {
+      setLeftAnimated(
+        customLabelStyles.leftBlurred !== undefined
+          ? customLabelStyles.leftBlurred
+          : 0,
+      )
+      setFontSizeAnimated(
+        customLabelStyles.fontSizeBlurred
+          ? customLabelStyles.fontSizeBlurred
+          : 14,
+      )
+      setTopAnimated(
+        customLabelStyles.topBlurred ? customLabelStyles.topBlurred : 0,
+      )
+      setFontColorAnimated(0)
+    } else {
+      setFontColorAnimated(0)
+    }
+  }
 
   const countdown = XStyleSheet.flatten([
     styles.countdown,
@@ -340,14 +440,100 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
     showCountdownStyles,
   ])
 
+  function onLayout(event: LayoutChangeEvent) {
+    const { height } = event.nativeEvent.layout
+    setHalfTop(height / 2)
+  }
+
+  const positionAnimations = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateX: withTiming(leftAnimated, {
+            duration: animationDuration,
+            easing: Easing.in(Easing.ease),
+          }),
+        },
+        {
+          translateY: withTiming(topAnimated, {
+            duration: animationDuration,
+            easing: Easing.in(Easing.ease),
+          }),
+        },
+      ],
+      fontSize: withTiming(fontSizeAnimated, {
+        duration: animationDuration,
+        easing: Easing.in(Easing.ease),
+      }),
+    }
+  }, [leftAnimated, topAnimated, fontSizeAnimated, animationDuration])
+
+  const progress = useDerivedValue(() => {
+    return withTiming(fontColorAnimated, {
+      duration: animationDuration,
+      easing: Easing.in(Easing.ease),
+    })
+  })
+
+  const colorAnimation = useAnimatedStyle(() => {
+    const color = interpolateColor(
+      progress.value,
+      [0, 1],
+      [
+        customLabelStyles.colorBlurred !== undefined
+          ? customLabelStyles.colorBlurred
+          : '#000',
+        customLabelStyles.colorFocused !== undefined
+          ? customLabelStyles.colorFocused
+          : '#000',
+      ],
+    )
+
+    return {
+      color,
+    }
+  })
+
   return (
     <View style={style}>
       <View>
-        <TouchableWithoutFeedback style={Layout.fill} onPress={setFocus}>
+        <TouchableWithoutFeedback
+          style={Layout.fill}
+          onPress={setFocus}
+          onLayout={onLayout}
+        >
           <View style={styles.rootView}>
+            {staticLabel && (
+              <AnimatedText
+                {...labelProps}
+                onPress={setFocus}
+                style={[
+                  _style,
+                  colorAnimation,
+                  {
+                    left: labelStyles?.left
+                      ? labelStyles?.left
+                      : customLabelStyles.leftFocused
+                      ? customLabelStyles.leftFocused
+                      : 20,
+                    top: -(_style?.fontSize ? _style?.fontSize : 10) / 2,
+                  },
+                ]}
+              >
+                {label}
+              </AnimatedText>
+            )}
             <View style={containerStyles}>
               {leftComponent && leftComponent}
               <View style={[Layout.fill, Layout.row]}>
+                {!staticLabel && (
+                  <AnimatedText
+                    {...labelProps}
+                    style={[_style, positionAnimations, colorAnimation]}
+                  >
+                    {label}
+                  </AnimatedText>
+                )}
                 {label == null && !isFocusedState && (
                   <View style={_style}>
                     <Text {...labelProps} style={{ color: Colors.k49658c }}>
@@ -410,12 +596,12 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
         </TouchableWithoutFeedback>
       </View>
       {textError && (
-        <View>
+        <Animated.View entering={FadeIn}>
           <Padding top={6} />
           <AppText style={errorStyle} fontSize={12} color={Colors.error}>
             {textError}
           </AppText>
-        </View>
+        </Animated.View>
       )}
     </View>
   )
