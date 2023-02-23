@@ -17,6 +17,7 @@ import {
   ViewStyle,
   TouchableWithoutFeedback,
   LayoutChangeEvent,
+  Image,
 } from 'react-native'
 import Animated, {
   useAnimatedStyle,
@@ -26,8 +27,6 @@ import Animated, {
   interpolateColor,
   FadeIn,
 } from 'react-native-reanimated'
-
-import { EyeOnSvg, EyeOffSvg } from '../Assets/Svg'
 import AppText from './AppText'
 import Padding from './Padding'
 import { Layout, XStyleSheet } from '../Theme'
@@ -574,9 +573,15 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
                     onPress={() => _toggleVisibility()}
                   >
                     {secureText ? (
-                      <EyeOffSvg size={14} />
+                      <Image
+                        source={require('../Assets/eye_off.png')}
+                        style={{ height: 14, width: 14, resizeMode: 'contain' }}
+                      />
                     ) : (
-                      <EyeOnSvg size={14} />
+                      <Image
+                        source={require('../Assets/eye_on.png')}
+                        style={{ height: 14, width: 14, resizeMode: 'contain' }}
+                      />
                     )}
                   </TouchableOpacity>
                 )}

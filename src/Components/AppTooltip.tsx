@@ -15,12 +15,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native'
-import Animated, {
-  FadeIn,
-  FadeInLeft,
-  FadeInRight,
-  ZoomIn,
-} from 'react-native-reanimated'
 import { Colors } from './Colors'
 import AppText from './AppText'
 import { Obx } from './index'
@@ -47,7 +41,6 @@ interface AppTooltipProps {
   onClose: () => void
 }
 const AppTooltip = ({
-  animation = 'fade',
   children,
   content,
   contentTextStyle,
@@ -68,20 +61,6 @@ const AppTooltip = ({
     height: 50,
     width: 50,
   })
-  const getEnteringType = useCallback(() => {
-    switch (animation) {
-      case 'fade':
-        return FadeIn
-      case 'scale':
-        return ZoomIn
-      case 'slide':
-        return direction === 'topRight' || direction === 'bottomRight'
-          ? FadeInLeft
-          : FadeInRight
-      default:
-        return
-    }
-  }, [animation, direction])
 
   const _onPress = useCallback(() => {
     onPress && onPress()
@@ -105,7 +84,7 @@ const AppTooltip = ({
           <Pressable onPress={onClose} style={styles.backdrop} />
           <Obx>
             {() => (
-              <Animated.View
+              <View
                 style={[
                   styles.contentView,
                   contentContainerStyle,
@@ -122,14 +101,13 @@ const AppTooltip = ({
                   },
                   maxContentWidth && { maxWidth: maxContentWidth },
                 ]}
-                entering={getEnteringType()}
               >
                 {renderContent ? (
                   renderContent()
                 ) : (
                   <AppText style={contentTextStyle}>{content}</AppText>
                 )}
-              </Animated.View>
+              </View>
             )}
           </Obx>
         </View>

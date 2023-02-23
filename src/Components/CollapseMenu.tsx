@@ -1,4 +1,3 @@
-import { ChevronDownSvg } from '../Assets/Svg'
 import { XStyleSheet } from '../Theme'
 import { autorun } from 'mobx'
 import { useLocalObservable } from 'mobx-react-lite'
@@ -160,7 +159,11 @@ const CollapseMenu = forwardRef(
                 customArrow(state.collapsed)
               ) : (
                 <Animated.View style={arrowStyle}>
-                  <ChevronDownSvg color={Colors.white} size={14} />
+                  <Image
+                    source={require('../Assets/arrow_down.png')}
+                    style={{ height: 14, width: 14 }}
+                    resizeMode={'contain'}
+                  />
                 </Animated.View>
               )
             }

@@ -3,7 +3,6 @@ import { XStyleSheet } from '../Theme'
 // @ts-ignore
 import React, { memo } from 'react'
 import { StatusBar, StatusBarProps, View, ViewStyle } from 'react-native'
-import Animated, { FadeIn } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 interface ContainerProps {
@@ -23,16 +22,12 @@ const Container = ({
   disableBottom = true,
   statusBarProps,
   safeAreaColor,
-  useFading = false,
   style,
   containerStyle,
 }: ContainerProps) => {
   const { bottom, top } = useSafeAreaInsets()
   return (
-    <Animated.View
-      entering={useFading ? FadeIn : null}
-      style={[styles.container, containerStyle]}
-    >
+    <View style={[styles.container, containerStyle]}>
       {!disableTop && (
         <View
           style={[
@@ -68,7 +63,7 @@ const Container = ({
           ]}
         />
       )}
-    </Animated.View>
+    </View>
   )
 }
 
