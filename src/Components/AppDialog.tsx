@@ -1,4 +1,3 @@
-import { CloseSvg } from '../Assets/Svg'
 import { Layout, ResponsiveHeight, screenWidth, XStyleSheet } from '../Theme'
 import { isAndroid } from '../Utils'
 import { BlurView } from '@react-native-community/blur'
@@ -84,7 +83,10 @@ const AppDiaLog = ({
         <View style={styles.container}>
           {!hideCloseButton && (
             <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
-              <CloseSvg />
+              <Image
+                source={require('../Assets/close.png')}
+                style={{ height: 20, width: 20, resizeMode: 'contain' }}
+              />
             </TouchableOpacity>
           )}
           <Padding top={ResponsiveHeight(50)} />

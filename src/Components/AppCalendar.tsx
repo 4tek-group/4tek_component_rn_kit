@@ -1,10 +1,9 @@
-import { ChevronRightSvg } from '../Assets/Svg'
 import { getMonths, getWeekdays } from '../Utils'
 import { useLocalObservable } from 'mobx-react-lite'
 // @ts-ignore
 import React, { memo, useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
+import { Image, View } from 'react-native'
 import CalendarPicker, {
   CalendarPickerProps,
 } from 'react-native-calendar-picker'
@@ -80,10 +79,15 @@ const AppCalendar = ({
             months={getMonths(t)}
             selectedStartDate={state.selectedStartDate}
             selectedEndDate={state.selectedEndDate}
-            nextComponent={<ChevronRightSvg />}
+            nextComponent={
+              <Image
+                source={require('../Assets/arrow_right.png')}
+                style={{ height: 20, width: 20 }}
+              />
+            }
             previousComponent={
               <View style={styles.transform}>
-                <ChevronRightSvg />
+                <Image source={require('../Assets/arrow_right.png')} />
               </View>
             }
             selectMonthTitle={t('date.cthang')}
@@ -123,7 +127,7 @@ const AppCalendar = ({
   )
 }
 const styles = XStyleSheet.create({
-  transform: { transform: [{ rotateZ: '180deg' }] },
+  transform: { transform: [{ rotateZ: '180deg' }], height: 20, width: 20 },
   iconNext: {
     width: 32,
     height: 32,

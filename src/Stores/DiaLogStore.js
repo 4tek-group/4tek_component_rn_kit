@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx'
-import { hydrateStore, isHydrated } from 'mobx-persist-store'
 export default class DiaLogStore {
   show = false
   title = ''
@@ -83,14 +82,5 @@ export default class DiaLogStore {
     this.backdropForClosing = false
     this.onClose = () => {}
     this.onPress = () => {}
-  }
-
-  // check for hydration (required)
-  get isHydrated() {
-    return isHydrated(this)
-  }
-  // hydrate the store (required)
-  async hydrateStore() {
-    await hydrateStore(this)
   }
 }
