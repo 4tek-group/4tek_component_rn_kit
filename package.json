@@ -28,8 +28,7 @@
     "react-native-safe-area-context": "4.3.1",
     "react-native-spinkit": "1.5.1",
     "react-native-webview": "11.23.1",
-    "@react-native-cookies/cookies": "6.2.1",
-    "react-native-device-info": "10.4.0"
+    "@react-native-cookies/cookies": "6.2.1"
   },
   "peerDependencies": {
     "react": ">=16.8.1",
