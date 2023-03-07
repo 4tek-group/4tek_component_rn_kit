@@ -29,7 +29,7 @@
     "react-native-spinkit": "1.5.1",
     "react-native-webview": "11.23.1",
     "@react-native-cookies/cookies": "6.2.1",
-    "react-native-device-info": "10.4.0"
+    "mobx-persist-store": "1.0.6"
   },
   "peerDependencies": {
     "react": ">=16.8.1",
