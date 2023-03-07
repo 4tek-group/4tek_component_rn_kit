@@ -295,10 +295,8 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
     input,
     {
       flex: 1,
-      color:
-        input.color !== undefined
-          ? input.color
-          : customLabelStyles.colorFocused,
+      //Force color
+      color: Colors.black,
       zIndex: _style?.zIndex !== undefined ? _style.zIndex - 2 : 0,
     },
   ])
