@@ -51,7 +51,6 @@ const AppTooltip = ({
   renderContent,
   svgIcon,
   onPress,
-  onClose,
   open,
 }: AppTooltipProps) => {
   const viewRef = useRef<View>()
@@ -81,7 +80,6 @@ const AppTooltip = ({
       </Pressable>
       {open && (
         <View style={styles.tooltipView}>
-          <Pressable onPress={onClose} style={styles.backdrop} />
           <Obx>
             {() => (
               <View
@@ -105,7 +103,9 @@ const AppTooltip = ({
                 {renderContent ? (
                   renderContent()
                 ) : (
-                  <AppText style={contentTextStyle}>{content}</AppText>
+                  <AppText style={contentTextStyle} color={Colors.white}>
+                    {content}
+                  </AppText>
                 )}
               </View>
             )}
@@ -125,7 +125,7 @@ const styles = XStyleSheet.create({
   },
   contentView: {
     position: 'absolute',
-    backgroundColor: Colors.gray,
+    backgroundColor: Colors.primary,
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 8,

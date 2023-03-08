@@ -9,7 +9,6 @@ import {
   StyleSheet,
   TextStyle,
   TouchableOpacity,
-  ViewStyle,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import AppText, { AppTextProps } from './AppText'
@@ -22,7 +21,6 @@ export interface AppButtonProps {
   svgIcon?: React.ReactNode
   onPress?: () => void
   disabled?: boolean
-  backgroundColor?: string
   colors?: (string | number)[]
   start?: { x: number; y: number }
   end?: { x: number; y: number }
@@ -34,9 +32,10 @@ export interface AppButtonProps {
   opacity?: number
   iconDirection?: 'left' | 'right'
   textProps?: Omit<AppTextProps, 'children'>
-  style?: StyleProp<ViewStyle> | ViewStyle
   radius?: number
   spaceBetween?: number
+  height?: number
+  width?: number
   shadowColor?: string
   shadowOpacity?: number
   shadowSize?: number
@@ -45,7 +44,6 @@ export interface AppButtonProps {
 
 const AppButton = ({
   radius = 8,
-  backgroundColor = Colors.primary,
   colors,
   disabled,
   disabledBackgroundColor = Colors.gray,
@@ -58,10 +56,10 @@ const AppButton = ({
   start = { x: 0, y: 0 },
   end = { x: 1, y: 0 },
   text,
+  height = 44,
   textStyle,
   iconDirection = 'right',
   textColor = Colors.white,
-  style,
   spaceBetween = 10,
   center = true,
   textProps: { style: extraTextStyle, ...restTextProps } = {},
@@ -73,9 +71,9 @@ const AppButton = ({
       alignItems: 'center',
       justifyContent: center ? 'center' : 'flex-start',
       paddingHorizontal: 16,
-      height: 44,
+      height: height,
       borderRadius: radius,
-      backgroundColor: disabled ? disabledBackgroundColor : backgroundColor,
+      backgroundColor: disabled ? disabledBackgroundColor : Colors.primary,
       overflow: 'hidden',
     },
     baseTxt: {
@@ -94,7 +92,7 @@ const AppButton = ({
     <TouchableOpacity
       {...restProps}
       disabled={disabled}
-      style={[styles.baseBtn, style]}
+      style={[styles.baseBtn]}
       activeOpacity={opacity}
       onPress={onPress}
     >

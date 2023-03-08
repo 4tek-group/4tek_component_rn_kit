@@ -1,6 +1,6 @@
 {
   "name": "react-native-4tek-component-kit",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "4Tek component kit",
   "main": "src/index",
   "react-native": "src/index",
@@ -28,9 +28,7 @@
     "react-native-safe-area-context": "4.3.1",
     "react-native-spinkit": "1.5.1",
     "react-native-webview": "11.23.1",
-    "@react-native-cookies/cookies": "6.2.1",
-    "react-native-reanimated": "2.9.1",
-    "react-native-device-info": "10.4.0"
+    "@react-native-cookies/cookies": "6.2.1"
   },
   "peerDependencies": {
     "react": ">=16.8.1",

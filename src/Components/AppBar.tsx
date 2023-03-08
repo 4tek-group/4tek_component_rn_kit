@@ -3,35 +3,34 @@ import { goBack } from '../Utils/NavigationUtils'
 import React, { memo } from 'react'
 import { TouchableOpacity, View, StyleSheet, Image } from 'react-native'
 import AppText from './AppText'
+import { Colors } from './Colors'
 interface AppBarProps {
   title: string
   showBack?: boolean
   onBackPress?: () => void
   onRightPress?: () => void
-  leftComponent?: React.ReactNode
   rightComponent?: React.ReactNode
 }
 const AppBar = ({
   title,
   showBack = true,
   onBackPress = () => goBack(),
-  leftComponent,
   onRightPress,
   rightComponent,
 }: AppBarProps) => {
   return (
     <View style={styles.header}>
-      {showBack && !!leftComponent ? (
-        leftComponent
-      ) : (
+      {showBack && (
         <TouchableOpacity onPress={onBackPress} style={styles.backBtn}>
           <Image
-            source={require('../Assets/arrow_right.png')}
-            style={{ height: 20, width: 20 }}
+            source={require('../Assets/left-arrow-white.png')}
+            style={{ height: 15, width: 15 }}
           />
         </TouchableOpacity>
       )}
-      <AppText fontSize={20}>{title}</AppText>
+      <AppText fontSize={20} color={Colors.white}>
+        {title}
+      </AppText>
       {!!rightComponent && (
         <TouchableOpacity onPress={onRightPress} style={styles.rightComponent}>
           {rightComponent}
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 44,
+    backgroundColor: Colors.blue_01,
   },
   backBtn: {
     position: 'absolute',
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     left: 0,
     zIndex: 1,
-    transform: [{ rotate: '180deg' }],
   },
   rightComponent: {
     position: 'absolute',

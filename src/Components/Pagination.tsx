@@ -103,12 +103,10 @@ const Pagination = ({
           style={[styles.arrowView, arrowStyle]}
         >
           {icLeft || (
-            <View style={{ transform: [{ rotate: '180deg' }] }}>
-              <Image
-                source={require('../Assets/arrow_right.png')}
-                style={{ height: 20, width: 20 }}
-              />
-            </View>
+            <Image
+              source={require('../Assets/left-arrow-white.png')}
+              style={{ height: 12, width: 12 }}
+            />
           )}
         </Pressable>
       )}
@@ -119,10 +117,12 @@ const Pagination = ({
           style={[styles.arrowView, arrowStyle]}
         >
           {icRight || (
-            <Image
-              source={require('../Assets/arrow_right.png')}
-              style={{ height: 20, width: 20 }}
-            />
+            <View style={{ transform: [{ rotate: '180deg' }] }}>
+              <Image
+                source={require('../Assets/left-arrow-white.png')}
+                style={{ height: 12, width: 12 }}
+              />
+            </View>
           )}
         </Pressable>
       )}

@@ -23,7 +23,7 @@ interface AppImageProps {
 }
 const AppImage = ({
   source,
-  blurHashEnabled = true,
+  blurHashEnabled = false,
   resizeMode = 'cover',
   style,
   containerStyle,

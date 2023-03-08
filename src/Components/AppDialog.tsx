@@ -23,8 +23,8 @@ interface AppDiaLogProps {
   title?: string
   message?: string
   dialogIcon?: ImageSourcePropType
-  titleColor?: string
-  messageColor?: string
+  // titleColor?: string
+  // messageColor?: string
   messageStyle?: TextStyle
   customMessage?: React.ReactNode
   buttonText?: string
@@ -45,14 +45,14 @@ const AppDiaLog = ({
   messageStyle,
   customMessage,
   dialogIcon,
-  titleColor,
+  // titleColor,
   buttonText,
   buttonProps,
   buttonCustom,
   showTime,
   footer,
   hideCloseButton = false,
-  messageColor,
+  // messageColor,
   backdropForClosing,
 }: AppDiaLogProps) => {
   const { t } = useTranslation()
@@ -95,7 +95,7 @@ const AppDiaLog = ({
               style={[
                 styles.titleTxt,
                 {
-                  color: titleColor,
+                  color: Colors.black,
                   marginTop: dialogIcon
                     ? ResponsiveHeight(20)
                     : ResponsiveHeight(-30),
@@ -106,13 +106,7 @@ const AppDiaLog = ({
             </AppText>
           )}
           {!!message && (
-            <AppText
-              style={[
-                styles.messageTxt,
-                messageStyle,
-                messageColor && { color: messageColor },
-              ]}
-            >
+            <AppText style={[styles.messageTxt, messageStyle]}>
               {t(message as any)}
             </AppText>
           )}
@@ -124,9 +118,7 @@ const AppDiaLog = ({
               <AppButton
                 {...buttonProps}
                 onPress={onPress}
-                style={styles.mainBtn}
                 textStyle={styles.mainBtnTxt}
-                backgroundColor={Colors.primary}
                 text={t(buttonText as any).toUpperCase()}
               />
             </View>
@@ -167,7 +159,7 @@ const styles = XStyleSheet.create({
   },
   footerContainer: {
     justifyContent: 'flex-end',
-    backgroundColor: Colors.k1D1E22,
+    backgroundColor: Colors.white,
     padding: 20,
     borderBottomEndRadius: 16,
     borderBottomStartRadius: 16,
