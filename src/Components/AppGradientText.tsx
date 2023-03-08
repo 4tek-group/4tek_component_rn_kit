@@ -14,7 +14,7 @@ interface AppGradientTextProps extends AppTextProps {
 }
 const AppGradientText = ({
   locations,
-  colors,
+  // colors,
   start = { x: 0, y: 0 },
   end = { x: 1, y: 0 },
   style,
@@ -40,7 +40,7 @@ const AppGradientText = ({
       }
     >
       <LinearGradient
-        colors={colors}
+        colors={[Colors.blue_05, Colors.blue_01]}
         start={start}
         end={end}
         locations={locations}

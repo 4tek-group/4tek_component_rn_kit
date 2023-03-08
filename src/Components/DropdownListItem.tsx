@@ -206,7 +206,7 @@ const styles = XStyleSheet.create({
     backgroundColor: Colors.white,
   },
   eveItem: {
-    backgroundColor: Colors.kEBECED,
+    backgroundColor: Colors.primary,
   },
   textStyle: {
     color: Colors.black,

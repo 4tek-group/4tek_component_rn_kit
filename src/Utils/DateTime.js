@@ -29,31 +29,31 @@ export const getDiffTimeFromNow = (dateTime, format = 'seconds') => {
   return Moment(dateTime).diff(Moment(), format)
 }
 
-export const getWeekdays = t => {
+export const getWeekdays = () => {
   return [
-    t('date.t2'),
-    t('date.t3'),
-    t('date.t4'),
-    t('date.t5'),
-    t('date.t6'),
-    t('date.t7'),
-    t('date.cn'),
+    'T2',
+    'T3',
+    'T4',
+    'T5',
+    'T6',
+    'T7',
+    'CN',
   ]
 }
 
-export const getMonths = t => {
+export const getMonths = () => {
   return [
-    t('date.thang1'),
-    t('date.thang2'),
-    t('date.thang3'),
-    t('date.thang4'),
-    t('date.thang5'),
-    t('date.thang6'),
-    t('date.thang7'),
-    t('date.thang8'),
-    t('date.thang9'),
-    t('date.thang10'),
-    t('date.thang11'),
-    t('date.thang12'),
+    'Tháng 1',
+    'Tháng 2',
+    'Tháng 3',
+    'Tháng 4',
+    'Tháng 5',
+    'Tháng 6',
+    'Tháng 7',
+    'Tháng 8',
+    'Tháng 9',
+    'Tháng 10',
+    'Tháng 11',
+    'Tháng 12',
   ]
 }

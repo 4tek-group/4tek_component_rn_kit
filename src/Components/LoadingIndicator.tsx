@@ -7,7 +7,7 @@ import { XStyleSheet } from '../Theme'
 
 interface LoadingIndicatorProps {
   type: 'default' | SpinnerType
-  color?: string
+  // color?: string
   size?: number
   overlay?: boolean
   overlayColor?: string
@@ -16,7 +16,7 @@ interface LoadingIndicatorProps {
 }
 const LoadingIndicator = ({
   type = 'default',
-  color = Colors.primary,
+  // color = Colors.primary,
   size = 20,
   overlay,
   overlayColor = Colors.black50,
@@ -26,9 +26,9 @@ const LoadingIndicator = ({
   const renderLoadingIndicator = () => {
     switch (type) {
       case 'default':
-        return <ActivityIndicator size={size} color={color} />
+        return <ActivityIndicator size={size} color={Colors.primary} />
       default:
-        return <Spinkit type={type} size={size} color={color} />
+        return <Spinkit type={type} size={size} color={Colors.primary} />
     }
   }
   const Container = overlay ? Modal : View

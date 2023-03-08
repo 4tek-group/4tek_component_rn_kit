@@ -1,10 +1,8 @@
-import { ChevronRightSvg } from '../Assets/Svg'
 import { getMonths, getWeekdays } from '../Utils'
 import { useLocalObservable } from 'mobx-react-lite'
 // @ts-ignore
 import React, { memo, useCallback, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
+import { Image, View } from 'react-native'
 import CalendarPicker, {
   CalendarPickerProps,
 } from 'react-native-calendar-picker'
@@ -29,7 +27,6 @@ const AppCalendar = ({
   showButton = true,
   ...calendarPickerProps
 }: AppCalendarProps) => {
-  const { t } = useTranslation<'vi'>()
   const calendarRef = React.useRef(null)
   const state = useLocalObservable(() => ({
     selectedStartDate: null,
@@ -76,18 +73,23 @@ const AppCalendar = ({
             ref={calendarRef}
             startFromMonday={true}
             allowRangeSelection={allowRangeSelection}
-            weekdays={getWeekdays(t)}
-            months={getMonths(t)}
+            weekdays={getWeekdays()}
+            months={getMonths()}
             selectedStartDate={state.selectedStartDate}
             selectedEndDate={state.selectedEndDate}
-            nextComponent={<ChevronRightSvg />}
+            nextComponent={
+              <Image
+                source={require('../Assets/arrow_right.png')}
+                style={{ height: 20, width: 20 }}
+              />
+            }
             previousComponent={
               <View style={styles.transform}>
-                <ChevronRightSvg />
+                <Image source={require('../Assets/arrow_right.png')} />
               </View>
             }
-            selectMonthTitle={t('date.cthang')}
-            selectYearTitle={t('date.cnam')}
+            selectMonthTitle={'Chọn tháng'}
+            selectYearTitle={'Chọn năm'}
             disabledDatesTextStyle={styles.textDisableDays}
             allowBackwardRangeSelect={true}
             todayBackgroundColor={Colors.gray}
@@ -110,8 +112,7 @@ const AppCalendar = ({
           {showButton && (
             <View style={styles.containerBottomButton}>
               <AppButton
-                backgroundColor={Colors.primary}
-                text={t('xong').toLocaleUpperCase()}
+                text={'XONG'}
                 textColor={Colors.white}
                 onPress={onComplete}
               />
@@ -123,7 +124,7 @@ const AppCalendar = ({
   )
 }
 const styles = XStyleSheet.create({
-  transform: { transform: [{ rotateZ: '180deg' }] },
+  transform: { transform: [{ rotateZ: '180deg' }], height: 20, width: 20 },
   iconNext: {
     width: 32,
     height: 32,

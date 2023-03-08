@@ -10,11 +10,6 @@ import {
 } from 'react-native'
 import { Blurhash } from 'react-native-blurhash'
 import FastImage, { FastImageProps } from 'react-native-fast-image'
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated'
 import { Obx } from './index'
 import { XStyleSheet } from '../Theme'
 interface AppImageProps {
@@ -28,14 +23,13 @@ interface AppImageProps {
 }
 const AppImage = ({
   source,
-  blurHashEnabled = true,
+  blurHashEnabled = false,
   resizeMode = 'cover',
   style,
   containerStyle,
   disabled,
   onPress,
 }: AppImageProps) => {
-  const fadingAnim = useSharedValue(1)
   const state = useLocalObservable(() => ({
     hash: 'L9AB*A%LPqys8_H=yDR5nMMeVXR5',
     setHash: payload => (state.hash = payload),
@@ -48,32 +42,20 @@ const AppImage = ({
       })
     }
   }, [source, state])
-  const blurStyle = useAnimatedStyle(() => ({
-    opacity: fadingAnim.value,
-  }))
   return (
     <Pressable disabled={disabled} onPress={onPress} style={containerStyle}>
       {blurHashEnabled && (
-        <Animated.View style={[styles.blurhashView, blurStyle]}>
-          <Obx>
-            {() => (
-              <Blurhash
-                style={styles.blurhashView}
-                blurhash={state.hash}
-                resizeMode="cover"
-              />
-            )}
-          </Obx>
-        </Animated.View>
+        <Obx>
+          {() => (
+            <Blurhash
+              style={styles.blurhashView}
+              blurhash={state.hash}
+              resizeMode="cover"
+            />
+          )}
+        </Obx>
       )}
-      <FastImage
-        onLoadEnd={() => {
-          fadingAnim.value = withTiming(0)
-        }}
-        style={style}
-        resizeMode={resizeMode}
-        source={source as any}
-      />
+      <FastImage style={style} resizeMode={resizeMode} source={source as any} />
     </Pressable>
   )
 }

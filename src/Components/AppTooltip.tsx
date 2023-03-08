@@ -15,12 +15,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native'
-import Animated, {
-  FadeIn,
-  FadeInLeft,
-  FadeInRight,
-  ZoomIn,
-} from 'react-native-reanimated'
 import { Colors } from './Colors'
 import AppText from './AppText'
 import { Obx } from './index'
@@ -47,7 +41,6 @@ interface AppTooltipProps {
   onClose: () => void
 }
 const AppTooltip = ({
-  animation = 'fade',
   children,
   content,
   contentTextStyle,
@@ -58,7 +51,6 @@ const AppTooltip = ({
   renderContent,
   svgIcon,
   onPress,
-  onClose,
   open,
 }: AppTooltipProps) => {
   const viewRef = useRef<View>()
@@ -68,20 +60,6 @@ const AppTooltip = ({
     height: 50,
     width: 50,
   })
-  const getEnteringType = useCallback(() => {
-    switch (animation) {
-      case 'fade':
-        return FadeIn
-      case 'scale':
-        return ZoomIn
-      case 'slide':
-        return direction === 'topRight' || direction === 'bottomRight'
-          ? FadeInLeft
-          : FadeInRight
-      default:
-        return
-    }
-  }, [animation, direction])
 
   const _onPress = useCallback(() => {
     onPress && onPress()
@@ -102,10 +80,9 @@ const AppTooltip = ({
       </Pressable>
       {open && (
         <View style={styles.tooltipView}>
-          <Pressable onPress={onClose} style={styles.backdrop} />
           <Obx>
             {() => (
-              <Animated.View
+              <View
                 style={[
                   styles.contentView,
                   contentContainerStyle,
@@ -122,14 +99,15 @@ const AppTooltip = ({
                   },
                   maxContentWidth && { maxWidth: maxContentWidth },
                 ]}
-                entering={getEnteringType()}
               >
                 {renderContent ? (
                   renderContent()
                 ) : (
-                  <AppText style={contentTextStyle}>{content}</AppText>
+                  <AppText style={contentTextStyle} color={Colors.white}>
+                    {content}
+                  </AppText>
                 )}
-              </Animated.View>
+              </View>
             )}
           </Obx>
         </View>
@@ -147,7 +125,7 @@ const styles = XStyleSheet.create({
   },
   contentView: {
     position: 'absolute',
-    backgroundColor: Colors.gray,
+    backgroundColor: Colors.primary,
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 8,
