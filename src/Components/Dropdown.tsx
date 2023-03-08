@@ -133,7 +133,7 @@ const styles = XStyleSheet.create({
     backgroundColor: Colors.white,
   },
   selectedItemContainerStyle: {
-    backgroundColor: Colors.kC0C0C0,
+    backgroundColor: Colors.primary,
   },
   listItemContainerStyle: {
     height: 52,
