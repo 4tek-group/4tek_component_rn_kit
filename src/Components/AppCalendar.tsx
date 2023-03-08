@@ -2,7 +2,6 @@ import { getMonths, getWeekdays } from '../Utils'
 import { useLocalObservable } from 'mobx-react-lite'
 // @ts-ignore
 import React, { memo, useCallback, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Image, View } from 'react-native'
 import CalendarPicker, {
   CalendarPickerProps,
@@ -28,7 +27,6 @@ const AppCalendar = ({
   showButton = true,
   ...calendarPickerProps
 }: AppCalendarProps) => {
-  const { t } = useTranslation<'vi'>()
   const calendarRef = React.useRef(null)
   const state = useLocalObservable(() => ({
     selectedStartDate: null,
@@ -75,8 +73,8 @@ const AppCalendar = ({
             ref={calendarRef}
             startFromMonday={true}
             allowRangeSelection={allowRangeSelection}
-            weekdays={getWeekdays(t)}
-            months={getMonths(t)}
+            weekdays={getWeekdays()}
+            months={getMonths()}
             selectedStartDate={state.selectedStartDate}
             selectedEndDate={state.selectedEndDate}
             nextComponent={
@@ -90,8 +88,8 @@ const AppCalendar = ({
                 <Image source={require('../Assets/arrow_right.png')} />
               </View>
             }
-            selectMonthTitle={t('date.cthang')}
-            selectYearTitle={t('date.cnam')}
+            selectMonthTitle={'Chọn tháng'}
+            selectYearTitle={'Chọn năm'}
             disabledDatesTextStyle={styles.textDisableDays}
             allowBackwardRangeSelect={true}
             todayBackgroundColor={Colors.gray}
@@ -114,8 +112,7 @@ const AppCalendar = ({
           {showButton && (
             <View style={styles.containerBottomButton}>
               <AppButton
-                backgroundColor={Colors.primary}
-                text={t('xong').toLocaleUpperCase()}
+                text={'XONG'}
                 textColor={Colors.white}
                 onPress={onComplete}
               />
