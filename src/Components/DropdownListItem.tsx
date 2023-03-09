@@ -209,7 +209,7 @@ const styles = XStyleSheet.create({
     backgroundColor: Colors.primary,
   },
   textStyle: {
-    color: Colors.black,
+    color: Colors.white,
     fontSize: 13,
     paddingLeft: 10,
   },
