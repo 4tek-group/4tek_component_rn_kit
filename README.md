@@ -5,7 +5,8 @@ This is base component kit for mini app
 ## Installation
 
 ```sh
-npm install react-native-4tek-component-kit
+yarn add https://github.com/4tek-group/4tek_component_rn_kit.git
+npm install https://github.com/4tek-group/4tek_component_rn_kit.git
 ```
 
 ## Usage

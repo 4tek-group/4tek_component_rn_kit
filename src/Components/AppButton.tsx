@@ -21,12 +21,12 @@ export interface AppButtonProps {
   svgIcon?: React.ReactNode
   onPress?: () => void
   disabled?: boolean
-  colors?: (string | number)[]
+  isGradient?: boolean
   start?: { x: number; y: number }
   end?: { x: number; y: number }
-  disabledBackgroundColor?: string
-  disabledTextColor?: string
-  textColor?: string
+  // disabledBackgroundColor?: string
+  // disabledTextColor?: string
+  // textColor?: string
   textStyle?: StyleProp<TextStyle>
   iconStyle?: StyleProp<ImageStyle>
   opacity?: number
@@ -44,13 +44,14 @@ export interface AppButtonProps {
 
 const AppButton = ({
   radius = 8,
-  colors,
+  // colors,
   disabled,
-  disabledBackgroundColor = Colors.gray,
-  disabledTextColor = Colors.white,
-  icon,
-  svgIcon,
-  iconStyle,
+  // disabledBackgroundColor = Colors.gray,
+  // disabledTextColor = Colors.white,
+  isGradient,
+  // icon,
+  // svgIcon,
+  // iconStyle,
   onPress,
   opacity = 0.8,
   start = { x: 0, y: 0 },
@@ -59,8 +60,8 @@ const AppButton = ({
   height = 44,
   textStyle,
   iconDirection = 'right',
-  textColor = Colors.white,
-  spaceBetween = 10,
+  // textColor = Colors.white,
+  // spaceBetween = 10,
   center = true,
   textProps: { style: extraTextStyle, ...restTextProps } = {},
   ...restProps
@@ -73,11 +74,11 @@ const AppButton = ({
       paddingHorizontal: 16,
       height: height,
       borderRadius: radius,
-      backgroundColor: disabled ? disabledBackgroundColor : Colors.primary,
+      backgroundColor: disabled ? Colors.gray : Colors.primary,
       overflow: 'hidden',
     },
     baseTxt: {
-      color: disabled ? disabledTextColor : textColor,
+      color: Colors.white,
     },
     btnBg: {
       ...StyleSheet.absoluteFillObject,
@@ -96,13 +97,13 @@ const AppButton = ({
       activeOpacity={opacity}
       onPress={onPress}
     >
-      {!!colors && (
+      {isGradient && (
         <LinearGradient
           style={styles.btnBg}
           colors={
             disabled
-              ? [disabledBackgroundColor, disabledBackgroundColor]
-              : colors
+              ? [Colors.gray, Colors.gray]
+              : [Colors.blue_05, Colors.blue_03, Colors.blue_01]
           }
           start={start}
           end={end}
@@ -115,16 +116,16 @@ const AppButton = ({
       >
         {text}
       </AppText>
-      {(!!icon || !!svgIcon) && (
-        <>
-          <Padding left={ResponsiveWidth(spaceBetween)} />
-          {svgIcon ? (
-            svgIcon
-          ) : (
-            <Image source={icon} style={[styles.baseIc, iconStyle]} />
-          )}
-        </>
-      )}
+      {/*{(!!icon || !!svgIcon) && (*/}
+      {/*  <>*/}
+      {/*    <Padding left={ResponsiveWidth(spaceBetween)} />*/}
+      {/*    {svgIcon ? (*/}
+      {/*      svgIcon*/}
+      {/*    ) : (*/}
+      {/*      <Image source={icon} style={[styles.baseIc, iconStyle]} />*/}
+      {/*    )}*/}
+      {/*  </>*/}
+      {/*)}*/}
     </TouchableOpacity>
   )
 }
