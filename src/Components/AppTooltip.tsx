@@ -52,6 +52,7 @@ const AppTooltip = ({
   svgIcon,
   onPress,
   open,
+  onClose,
 }: AppTooltipProps) => {
   const viewRef = useRef<View>()
   const [position, setPosition] = useState({
@@ -80,6 +81,7 @@ const AppTooltip = ({
       </Pressable>
       {open && (
         <View style={styles.tooltipView}>
+          <Pressable onPress={onClose} style={styles.backdrop} />
           <Obx>
             {() => (
               <View
