@@ -7,7 +7,7 @@ import { Colors } from './Colors'
 import { XStyleSheet } from '../Theme'
 interface AppGradientTextProps extends AppTextProps {
   locations?: number[]
-  colors?: string[]
+  // colors?: string[]
   start?: { x: number; y: number }
   end?: { x: number; y: number }
   children: string

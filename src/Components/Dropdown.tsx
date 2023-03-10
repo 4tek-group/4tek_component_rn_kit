@@ -2,7 +2,7 @@
 import React, { memo } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { toHeight, XStyleSheet } from '../Theme'
-import DropDownListItem from './DropDownListItem'
+import DropDownListItem from './DropdownListItem'
 import { Colors } from './Colors'
 
 const Dropdown = ({
