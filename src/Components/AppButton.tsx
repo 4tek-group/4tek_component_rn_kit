@@ -1,10 +1,8 @@
-import { ResponsiveWidth, XStyleSheet } from '../Theme'
+import { XStyleSheet } from '../Theme'
 // @ts-ignore
 import React, { memo } from 'react'
 import {
-  Image,
   ImageSourcePropType,
-  ImageStyle,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -12,7 +10,6 @@ import {
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import AppText, { AppTextProps } from './AppText'
-import Padding from './Padding'
 import { Colors } from './Colors'
 
 export interface AppButtonProps {
@@ -24,11 +21,7 @@ export interface AppButtonProps {
   isGradient?: boolean
   start?: { x: number; y: number }
   end?: { x: number; y: number }
-  // disabledBackgroundColor?: string
-  // disabledTextColor?: string
-  // textColor?: string
   textStyle?: StyleProp<TextStyle>
-  iconStyle?: StyleProp<ImageStyle>
   opacity?: number
   iconDirection?: 'left' | 'right'
   textProps?: Omit<AppTextProps, 'children'>
@@ -40,18 +33,13 @@ export interface AppButtonProps {
   shadowOpacity?: number
   shadowSize?: number
   center?: boolean
+  bgTransparent?: boolean
 }
 
 const AppButton = ({
   radius = 8,
-  // colors,
   disabled,
-  // disabledBackgroundColor = Colors.gray,
-  // disabledTextColor = Colors.white,
   isGradient,
-  // icon,
-  // svgIcon,
-  // iconStyle,
   onPress,
   opacity = 0.8,
   start = { x: 0, y: 0 },
@@ -60,9 +48,8 @@ const AppButton = ({
   height = 44,
   textStyle,
   iconDirection = 'right',
-  // textColor = Colors.white,
-  // spaceBetween = 10,
   center = true,
+  bgTransparent = false,
   textProps: { style: extraTextStyle, ...restTextProps } = {},
   ...restProps
 }: AppButtonProps) => {
@@ -74,11 +61,21 @@ const AppButton = ({
       paddingHorizontal: 16,
       height: height,
       borderRadius: radius,
-      backgroundColor: disabled ? Colors.gray : Colors.primary,
+      backgroundColor: disabled
+        ? Colors.black_17
+        : bgTransparent
+        ? Colors.transparent
+        : Colors.primary,
+      borderWidth: 1,
+      borderColor: Colors.primary,
       overflow: 'hidden',
     },
     baseTxt: {
-      color: Colors.white,
+      color: disabled
+        ? Colors.black_10
+        : bgTransparent
+        ? Colors.primary
+        : Colors.black,
     },
     btnBg: {
       ...StyleSheet.absoluteFillObject,
@@ -103,7 +100,7 @@ const AppButton = ({
           colors={
             disabled
               ? [Colors.gray, Colors.gray]
-              : [Colors.blue_05, Colors.blue_03, Colors.blue_01]
+              : [Colors.primaryLight, Colors.primary]
           }
           start={start}
           end={end}
@@ -116,16 +113,6 @@ const AppButton = ({
       >
         {text}
       </AppText>
-      {/*{(!!icon || !!svgIcon) && (*/}
-      {/*  <>*/}
-      {/*    <Padding left={ResponsiveWidth(spaceBetween)} />*/}
-      {/*    {svgIcon ? (*/}
-      {/*      svgIcon*/}
-      {/*    ) : (*/}
-      {/*      <Image source={icon} style={[styles.baseIc, iconStyle]} />*/}
-      {/*    )}*/}
-      {/*  </>*/}
-      {/*)}*/}
     </TouchableOpacity>
   )
 }

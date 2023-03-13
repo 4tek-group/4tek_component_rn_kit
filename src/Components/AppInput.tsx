@@ -296,7 +296,7 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
     {
       flex: 1,
       //Force color
-      color: Colors.black,
+      color: Colors.white,
       zIndex: _style?.zIndex !== undefined ? _style.zIndex - 2 : 0,
     },
   ])
@@ -372,7 +372,7 @@ const InputField: React.ForwardRefRenderFunction<InputRef, Props> = (
                 )}
                 {label == null && !isFocusedState && (
                   <View style={_style}>
-                    <Text {...labelProps} style={{ color: Colors.k49658c }}>
+                    <Text {...labelProps} style={{ color: Colors.black_12 }}>
                       {placeholder}
                     </Text>
                   </View>
@@ -447,12 +447,12 @@ const styles = XStyleSheet.create({
   rootView: { flexDirection: 'row', flexGrow: 1 },
   container: {
     flexDirection: 'row',
-    color: Colors.k49658c,
-    borderColor: Colors.k49658c,
+    color: Colors.white,
+    borderColor: Colors.black_17,
     borderWidth: 1,
     borderRadius: 12,
     paddingHorizontal: 11,
-    backgroundColor: '#00000000',
+    backgroundColor: Colors.black_17,
     paddingTop: 10,
     paddingBottom: 10,
     alignContent: 'center',
