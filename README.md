@@ -9,6 +9,13 @@ yarn add https://github.com/4tek-group/4tek_component_rn_kit.git
 npm install https://github.com/4tek-group/4tek_component_rn_kit.git
 ```
 
+## List components had updated
+
+- Apptext
+- AppButton
+- AppInput
+- LoadingIndicator
+
 ## Usage
 
 ```js

@@ -40,7 +40,7 @@ const AppGradientText = ({
       }
     >
       <LinearGradient
-        colors={[Colors.blue_05, Colors.blue_01]}
+        colors={[Colors.primaryLight, Colors.primary]}
         start={start}
         end={end}
         locations={locations}

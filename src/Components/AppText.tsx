@@ -6,7 +6,7 @@ import { Colors } from './Colors'
 
 export interface AppTextProps extends TextProps {
   children: React.ReactNode
-  fontWeight?: keyof typeof AppFonts | string
+  fontWeight?: string
   fontSize?: number | keyof typeof FontSizes
   color?: string
   lineHeightRatio?: number
@@ -18,7 +18,7 @@ export interface AppTextProps extends TextProps {
 
 const AppText = ({
   children,
-  fontWeight = 400,
+  fontWeight = '400',
   fontSize = 'normal',
   color = Colors.black,
   lineHeightRatio,
@@ -36,6 +36,7 @@ const AppText = ({
       ? fontWeight
       : AppFonts[fontWeight],
     color,
+    fontWeight: fontWeight,
     fontSize: ResponsiveFont(size),
     ...(lineHeightRatio && {
       lineHeight: ResponsiveHeight(size * lineHeightRatio),
