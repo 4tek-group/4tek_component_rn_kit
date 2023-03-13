@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import AppText, { AppTextProps } from './AppText'
-import { Colors } from './Colors'
+import { Colors } from '../Theme'
 
 export interface AppButtonProps {
   text?: string

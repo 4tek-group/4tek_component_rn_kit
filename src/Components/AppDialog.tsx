@@ -16,7 +16,7 @@ import {
 import { AppButtonProps } from './AppButton'
 import AppText from './AppText'
 import Padding from './Padding'
-import { Colors } from './Colors'
+import { Colors } from '../Theme'
 import { AppButton } from './index'
 
 interface AppDiaLogProps {
