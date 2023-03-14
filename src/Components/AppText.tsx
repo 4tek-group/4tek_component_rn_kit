@@ -1,8 +1,13 @@
 import { StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native'
 // @ts-ignore
 import React, { memo } from 'react'
-import { AppFonts, FontSizes, ResponsiveFont, ResponsiveHeight } from '../Theme'
-import { Colors } from './Colors'
+import {
+  Colors,
+  AppFonts,
+  FontSizes,
+  ResponsiveFont,
+  ResponsiveHeight,
+} from '../Theme'
 
 export interface AppTextProps extends TextProps {
   children: React.ReactNode
@@ -20,7 +25,7 @@ const AppText = ({
   children,
   fontWeight = '400',
   fontSize = 'normal',
-  color = Colors.black,
+  color = Colors.white,
   lineHeightRatio,
   lineHeight,
   style,

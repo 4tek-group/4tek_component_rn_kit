@@ -1,9 +1,8 @@
 // @ts-ignore
 import React, { memo } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { toHeight, XStyleSheet } from '../Theme'
+import { toHeight, XStyleSheet, Colors } from '../Theme'
 import DropDownListItem from './DropdownListItem'
-import { Colors } from './Colors'
 
 const Dropdown = ({
   open,
@@ -97,7 +96,7 @@ const styles = XStyleSheet.create({
   },
   background: {
     backgroundColor: Colors.black,
-    borderColor: Colors.k838A92,
+    borderColor: Colors.primary,
   },
   dropdown: {
     borderWidth: 8,
@@ -106,7 +105,7 @@ const styles = XStyleSheet.create({
     borderRadius: 8,
   },
   disableBackground: {
-    backgroundColor: Colors.k838A92,
+    backgroundColor: Colors.gray,
   },
   placeholderStyle: {
     color: Colors.white,
@@ -115,7 +114,6 @@ const styles = XStyleSheet.create({
     marginLeft: -2,
   },
   arrowIconStyle: {
-    tintColor: Colors.white,
     width: 20,
     height: 20,
   },
@@ -150,6 +148,7 @@ const styles = XStyleSheet.create({
     height: 30,
     width: 30,
     marginRight: 5,
+    color: 'red'
   },
   defaultIconStyle: {
     height: 30,

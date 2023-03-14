@@ -20,8 +20,7 @@ import {
 } from 'react-native'
 import AppText from './AppText'
 import Padding from './Padding'
-import { Layout, XStyleSheet } from '../Theme'
-import { Colors } from './Colors'
+import { Layout, XStyleSheet, Colors } from '../Theme'
 
 export interface Props extends Omit<TextInputProps, 'secureTextEntry'> {
   /** Style to the container of whole component */

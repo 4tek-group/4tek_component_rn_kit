@@ -1,4 +1,5 @@
 import {
+  Colors,
   ResponsiveHeight,
   screenHeight,
   screenWidth,
@@ -15,7 +16,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native'
-import { Colors } from './Colors'
 import AppText from './AppText'
 import { Obx } from './index'
 

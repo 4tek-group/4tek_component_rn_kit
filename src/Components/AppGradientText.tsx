@@ -3,8 +3,7 @@ import MaskedView from '@react-native-masked-view/masked-view'
 import React, { memo } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import AppText, { AppTextProps } from './AppText'
-import { Colors } from './Colors'
-import { XStyleSheet } from '../Theme'
+import { XStyleSheet, Colors } from '../Theme'
 interface AppGradientTextProps extends AppTextProps {
   locations?: number[]
   // colors?: string[]

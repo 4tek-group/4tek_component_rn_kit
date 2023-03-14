@@ -2,8 +2,7 @@
 import React, { memo } from 'react'
 import { ActivityIndicator, Modal, Pressable, View } from 'react-native'
 import Spinkit, { SpinnerType } from 'react-native-spinkit'
-import { Colors } from './Colors'
-import { XStyleSheet } from '../Theme'
+import { XStyleSheet, Colors } from '../Theme'
 
 interface LoadingIndicatorProps {
   type: 'default' | SpinnerType

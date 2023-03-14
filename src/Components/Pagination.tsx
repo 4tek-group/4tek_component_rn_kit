@@ -1,9 +1,8 @@
-// @ts-ignore
 import React, { memo, useMemo } from 'react'
 import { Image, Pressable, TextStyle, View, ViewStyle } from 'react-native'
-import { XStyleSheet } from '../Theme'
+import { XStyleSheet, Colors } from '../Theme'
 import AppText from './AppText'
-import { Colors } from './Colors'
+
 interface PaginationProps {
   maxPage: number
   currentPage: number
@@ -20,6 +19,7 @@ interface PaginationProps {
   icLeft?: React.ReactNode
   icRight?: React.ReactNode
 }
+
 const Pagination = ({
   currentPage,
   maxPage,
@@ -40,7 +40,7 @@ const Pagination = ({
   const showArrowRight = showArrows && currentPage < maxPage
   const renderIndicatorItem = page => {
     if (page === 'dots') {
-      return render3DotIndicator()
+      return render3DotIndicator(page)
     }
     const isActive = page === currentPage
     const indicatorStyles = [
@@ -65,9 +65,9 @@ const Pagination = ({
       </Pressable>
     )
   }
-  const render3DotIndicator = () => {
+  const render3DotIndicator = (page: string) => {
     return (
-      <View style={[styles.indicatorView, indicatorStyle]}>
+      <View style={[styles.indicatorView, indicatorStyle]} key={page}>
         <AppText style={[styles.indicatorText, indicatorTextStyle]}>
           ...
         </AppText>
@@ -95,6 +95,7 @@ const Pagination = ({
       ...postPages,
     ]
   }, [currentPage, maxPage])
+
   return (
     <View style={[styles.rootView, style]}>
       {showArrowLeft && (

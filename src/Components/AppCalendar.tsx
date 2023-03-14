@@ -6,8 +6,7 @@ import { Image, View } from 'react-native'
 import CalendarPicker, {
   CalendarPickerProps,
 } from 'react-native-calendar-picker'
-import { Colors } from './Colors'
-import { screenWidth, XStyleSheet } from '../Theme'
+import { screenWidth, XStyleSheet, Colors } from '../Theme'
 import AppButton from './AppButton'
 import { Obx } from './index'
 
@@ -111,11 +110,7 @@ const AppCalendar = ({
           />
           {showButton && (
             <View style={styles.containerBottomButton}>
-              <AppButton
-                text={'XONG'}
-                textColor={Colors.white}
-                onPress={onComplete}
-              />
+              <AppButton text={'XONG'} onPress={onComplete} />
             </View>
           )}
         </View>

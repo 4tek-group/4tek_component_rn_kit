@@ -3,10 +3,9 @@ import React, { memo, useCallback, useMemo } from 'react'
 
 import { TouchableOpacity, View } from 'react-native'
 
-import { XStyleSheet } from '../Theme'
+import { XStyleSheet, Colors } from '../Theme'
 
 import AppText from './AppText'
-import { Colors } from './Colors'
 
 function DropDownListItem({
   item,
